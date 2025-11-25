@@ -1,7 +1,8 @@
 const http = require("http");
 const server = http.createServer((req, res) => {
   res.setHeader("content-type", "text/html");
-  res.write(`<!DOCTYPE html>
+  if (req.url === "/login") {
+    res.write(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -105,6 +106,14 @@ const server = http.createServer((req, res) => {
 </body>
 </html>
 `);
+  }
+  else if(req.url==="/home"){
+    res.write(`<h1>Home page</h1>`);
+  }
+  else{
+    res.statusCode=404;
+    res.write(``);
+  }
 
   res.end();
 });
